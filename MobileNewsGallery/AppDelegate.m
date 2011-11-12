@@ -11,6 +11,7 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize tabBarController;
 
 - (void)dealloc
 {
@@ -22,7 +23,30 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    //self.window.backgroundColor = [UIColor whiteColor];
+    tabBarController = [[UITabBarController alloc] init];
+
+
+    
+    FrontPageViewController *frontPageController = [[FrontPageViewController alloc] init];
+    UINavigationController *FrontPageNavigationController = [[UINavigationController alloc] initWithRootViewController:frontPageController];
+    FrontPageNavigationController.tabBarItem.title = @"首页";
+    FrontPageNavigationController.tabBarItem.image = [UIImage imageNamed:@"frontpage.png"];
+    
+    UIViewController *CategoryViewController = [[UIViewController alloc] init];
+    CategoryViewController.tabBarItem.title = @"分类";
+    CategoryViewController.tabBarItem.image = [UIImage imageNamed:@"category.png"];
+    UIViewController *SearchViewController = [[UIViewController alloc] init];
+    SearchViewController.tabBarItem.title = @"搜索";
+    SearchViewController.tabBarItem.image = [UIImage imageNamed:@"search.png"];
+    UIViewController *MoreViewController = [[UIViewController alloc] init];
+    MoreViewController.tabBarItem.title = @"更多";
+    MoreViewController.tabBarItem.image = [UIImage imageNamed:@"More.png"];
+    
+    
+    NSArray *controller = [[NSArray alloc] initWithObjects:FrontPageNavigationController, CategoryViewController, SearchViewController, MoreViewController, nil];
+    tabBarController.viewControllers = controller;
+    [self.window addSubview:tabBarController.view];
     [self.window makeKeyAndVisible];
     return YES;
 }
